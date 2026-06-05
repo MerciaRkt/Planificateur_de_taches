@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
 #define FICHIER "tache.conf"
 
 typedef struct 
@@ -21,7 +20,6 @@ void afficher_taches()
         printf("Aucune tache.\n");
         return;
     }
-
     Tache t;
     int id = 1;
     printf("\n=== Taches planifiees ===\n");
@@ -119,7 +117,6 @@ void ajouter_tache()
             sprintf (cron , "%d %d %d * * %s" ,m, h ,jmois, t.commande);
             break;
         }
-    
         default:
             printf("Choix invalide.\n");
             return;
@@ -132,7 +129,6 @@ void ajouter_tache()
         system (cmd);
         printf("Tâche programmée.\n");
     }
-
     FILE *pf = fopen("tache.conf", "a");
     if (pf != NULL)
     {
@@ -149,7 +145,6 @@ void supprimer_tache()
     Tache t;
     char ligne[512];
     int id = 1;
-
     printf("Numero de tache a supprimer : ");
     scanf("%d", &numero);
     getchar();
@@ -181,7 +176,6 @@ void supprimer_tache()
     remove(FICHIER);
     rename("tmp.conf", FICHIER);
 
-
 //effacer dans crontab ou AT
     if (t.id_at == 0)
     {
@@ -199,7 +193,6 @@ void supprimer_tache()
 
 int main() {
     int choix;
-
     do {
         printf("\n===== PLANIFICATEUR DE TACHES =====\n");
         printf("1. Ajouter une tache\n");
@@ -226,8 +219,6 @@ int main() {
             default:
                 printf("Choix invalide.\n");
         }
-
     } while (choix != 4);
-
     return 0;
 }
